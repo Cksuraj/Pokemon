@@ -2,6 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Poki from "../poki/poki.jsx";
 
+// Axios for the data Download.
+// Here useEffect and useState hooks are used.
+// Using map to iterate over the Objects of API data
+
 function Pokemonlist() {
   const [isLoading, setLoading] = useState(true);
   const [pokemonList, setPokemonList] = useState([]);
@@ -55,16 +59,13 @@ function Pokemonlist() {
       <div style={{margin:'10px 5px'}}> 
         Pokemon List
       </div>
+      <div>
+        <button style={{marginRight:'10px'}}  disabled={!prveurl}  onClick={()=> setpokemonurl(prveurl)}> PREVIUS </button>
+        <button  disabled={!nexturl} onClick={()=> setpokemonurl(nexturl)} > NEXT </button>
+      </div>
       <div style={{display:'flex', flexWrap:'wrap' , gap:'10px', flexDirection:'row', margin:'0 auto',justifyContent:'space-between'}}>
       { (isLoading) ? 
-        "Loading...": pokemonList.map((p) =><Poki name={p.name} image={p.image} key={p.id} /> )}
-      </div>
-
-      <div>
-       
-        <button style={{marginRight:'10px'}}  disabled={!prveurl}  onClick={()=> setpokemonurl(prveurl)}> PREVIUS </button>
-       
-        <button  disabled={!nexturl} onClick={()=> setpokemonurl(nexturl)} > NEXT </button>
+        "Loading...": pokemonList.map((p) => <Poki name={p.name} image={p.image} key={p.id} id={p.id} /> )}
       </div>
     </div>
   );
